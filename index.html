@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brew by Nak</title>
+<meta name="description" content="Brew by Nak — specialty coffee, matcha and refreshers from a stainless-steel cart in Doha. Order on Talabat and Snoonu, or book the cart for your event.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Gochi+Hand&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+/* Layout: one long scroll — ink-on-paper hero, scrubbed statement, pinned "your event, your cup" reel, menu, steel catering cart, film strip, footer. */
+:root{
+  --paper:#F6F6F3; --paper-2:#ECECE7; --ink:#141414; --ink-2:#5D6065;
+  --steel-a:#E3E5E7; --steel-b:#B9BDC1; --rose:#C63A69; --rose-soft:#F5DCE5;
+  --line:rgba(20,20,20,.14);
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-hand:"Gochi Hand","Comic Sans MS","Marker Felt",cursive;
+  --f-ar:"IBM Plex Sans Arabic","Geeza Pro",Tahoma,sans-serif;
+  --f-ar-hand:"Aref Ruqaa","Geeza Pro",serif;
+  --gut:max(20px, env(safe-area-inset-left, 0px));
+  --gut-r:max(20px, env(safe-area-inset-right, 0px));
+  --ease:cubic-bezier(.2,.7,.1,1);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0F0F10; --paper-2:#19191B; --ink:#EDEDE9; --ink-2:#A3A6AB;
+  --steel-a:#3B3E42; --steel-b:#1F2124; --rose:#EF7AA0; --rose-soft:#3B1F2A;
+  --line:rgba(237,237,233,.14); color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --paper:#0F0F10; --paper-2:#19191B; --ink:#EDEDE9; --ink-2:#A3A6AB;
+  --steel-a:#3B3E42; --steel-b:#1F2124; --rose:#EF7AA0; --rose-soft:#3B1F2A;
+  --line:rgba(237,237,233,.14); color-scheme:dark; }
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;font-variation-settings:"wdth" 100;overflow-x:hidden}
+[dir="rtl"] body{font-family:var(--f-ar)}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:4px}
+.wrap{padding-left:var(--gut);padding-right:var(--gut);max-width:1440px;margin-inline:auto}
+.hand{font-family:var(--f-hand);font-weight:400;letter-spacing:0}
+[dir="rtl"] .hand{font-family:var(--f-ar-hand)}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+[dir="rtl"] .eyebrow{letter-spacing:0}
+.display{font-family:var(--f-display);font-variation-settings:"wdth" 72;font-weight:700;letter-spacing:-.025em;line-height:.9;text-wrap:balance;margin:0}
+[dir="rtl"] .display{font-family:var(--f-ar);letter-spacing:0;line-height:1.15;font-weight:700}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s var(--ease),border-color .4s;border-bottom:1px solid transparent}
+.nav.solid{background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:44px;height:32px}
+.brand span{font-family:var(--f-hand);font-size:22px;line-height:.85}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{text-decoration:none;font-size:15px;font-weight:500;position:relative}
+.nav-links a::after{content:"";position:absolute;inset:auto 0 -4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-end{display:flex;gap:10px;align-items:center}
+.lang{border:1px solid var(--line);background:transparent;border-radius:99px;padding:7px 14px;font-size:14px;cursor:pointer}
+.lang:hover{border-color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:10px;justify-content:center;border-radius:99px;padding:13px 22px;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--paper);transition:transform .3s var(--ease),background .3s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.rose{background:var(--rose);border-color:var(--rose);color:#fff}
+.btn svg{width:18px;height:18px}
+[dir="rtl"] .arrow{transform:scaleX(-1)}
+@media (max-width:860px){.nav-links{display:none}.nav .btn{padding:10px 16px}}
+
+/* ---------- hero ---------- */
+.hero{padding-top:calc(110px + env(safe-area-inset-top,0px));padding-bottom:80px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:end}
+.hero h1{font-size:clamp(60px,10.4vw,168px)}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.hero h1 .ln > span{display:inline-block}
+.sip{display:inline-block;color:var(--rose);font-size:clamp(44px,6.4vw,104px);transform:rotate(-4deg);margin-top:.12em;margin-inline-start:.08em}
+[dir="rtl"] .sip{transform:rotate(3deg)}
+.hero-copy{max-width:46ch;margin-top:36px;color:var(--ink-2);font-size:clamp(17px,1.35vw,20px)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.rating{display:flex;align-items:center;gap:10px;margin-top:28px;font-size:14px;color:var(--ink-2)}
+.rating b{color:var(--ink);font-size:15px}
+.stars{color:var(--rose);letter-spacing:2px}
+.hero-media{position:relative;justify-self:end;width:min(100%,440px,56vh)}
+.hero-media .frame .clip{aspect-ratio:820/1000}
+.frame{position:relative;border-radius:6px;padding:10px;background:repeating-linear-gradient(90deg,var(--steel-a) 0 2px,var(--steel-b) 2px 3px,var(--steel-a) 3px 6px);box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
+.frame .clip{overflow:hidden;border-radius:2px;aspect-ratio:820/1180}
+.frame img{width:100%;height:100%;object-fit:cover;transform-origin:50% 60%}
+.frame figcaption{position:absolute;inset-inline-start:18px;bottom:18px;color:#fff;font-size:13px;letter-spacing:.06em;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.snap{position:absolute;width:42%;background:#fff;padding:7px 7px 30px;box-shadow:0 18px 40px -18px rgba(0,0,0,.5);border-radius:2px;z-index:2}
+.snap img{aspect-ratio:820/1180;object-fit:cover;width:100%}
+.snap .hand{position:absolute;bottom:4px;inset-inline:0;text-align:center;color:#141414;font-size:17px}
+.snap.a{inset-inline-start:-34%;bottom:8%;transform:rotate(-7deg)}
+.snap.b{inset-inline-end:-5%;top:-7%;width:32%;transform:rotate(6deg)}
+.scroll-cue{display:flex;align-items:center;gap:10px;margin-top:56px;font-size:13px;color:var(--ink-2)}
+.scroll-cue i{display:block;width:1px;height:42px;background:var(--line);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;inset:0;background:var(--ink);animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-media{justify-self:center;width:min(78%,380px);margin-top:20px}
+  .snap.a{inset-inline-start:-22%}.snap.b{inset-inline-end:-14%}
+}
+
+/* ---------- statement ---------- */
+.statement{padding-block:clamp(90px,14vw,190px);border-top:1px solid var(--line)}
+.statement p{font-family:var(--f-display);font-variation-settings:"wdth" 90;font-weight:500;font-size:clamp(30px,4.4vw,68px);line-height:1.08;letter-spacing:-.02em;max-width:22ch;margin:0;text-wrap:balance}
+[dir="rtl"] .statement p{font-family:var(--f-ar);letter-spacing:0;line-height:1.35}
+.statement .w{display:inline}
+.statement em{font-style:normal;font-family:var(--f-hand);color:var(--rose);font-weight:400}
+[dir="rtl"] .statement em{font-family:var(--f-ar-hand)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:clamp(56px,7vw,100px);border-top:1px solid var(--line);padding-top:24px}
+.facts div{min-width:0}
+.facts b{display:block;font-family:var(--f-display);font-variation-settings:"wdth" 72;font-size:clamp(34px,4vw,56px);font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.facts span{font-size:14px;color:var(--ink-2)}
+@media (max-width:760px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- cups reel ---------- */
+.cups{background:#0D0D0E;color:#EDEDE9;position:relative}
+.cups-pin{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center;padding-block:100px}
+.cups .eyebrow{color:#9A9DA2}
+.cups h2{font-size:clamp(46px,6.6vw,104px)}
+.cups-lead{color:#A9ACB1;max-width:40ch;margin-top:22px}
+.ev-names{position:relative;margin-top:44px;height:clamp(120px,12vw,170px);border-top:1px solid rgba(237,237,233,.16);padding-top:20px}
+.ev{position:absolute;inset:20px 0 auto;opacity:0}
+.ev:first-child{opacity:1}
+.ev .t{font-family:var(--f-hand);font-size:clamp(36px,4.2vw,62px);line-height:1;color:#F3A7C0}
+.ev .t.ar{font-family:var(--f-ar-hand);display:inline-block}
+.ev .m{margin-top:10px;font-size:14px;color:#9A9DA2;letter-spacing:.04em}
+.cups-note{display:flex;gap:14px;align-items:center;margin-top:18px;font-size:14px;color:#C9CBCE}
+.cups-note b{color:#fff}
+.cups-stage{position:relative;justify-self:center;width:min(100%,430px);aspect-ratio:820/1180}
+.cup-shot{position:absolute;inset:0;border-radius:6px;overflow:hidden;clip-path:inset(100% 0 0 0)}
+.cup-shot:first-child{clip-path:inset(0 0 0 0)}
+.cup-shot img{width:100%;height:100%;object-fit:cover}
+.prog{position:absolute;inset-inline-start:-28px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.12);border-radius:2px}
+.prog i{position:absolute;inset:0 0 auto;height:20%;background:#F3A7C0;border-radius:2px}
+@media (max-width:900px){
+  .cups-pin{grid-template-columns:1fr;min-height:0;padding-block:90px 70px}
+  .ev-names{display:none}
+  .cups-stage{display:flex;aspect-ratio:auto;width:auto;margin-inline:calc(-1 * var(--gut));gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-inline:var(--gut);padding-bottom:6px;scrollbar-width:none}
+  .cups-stage::-webkit-scrollbar{display:none}
+  .cup-shot{position:relative;flex:0 0 72%;aspect-ratio:820/1180;clip-path:none;scroll-snap-align:center}
+  .cup-shot::after{content:attr(data-label);position:absolute;inset:auto 0 0;padding:40px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.7));font-family:var(--f-hand);font-size:26px;color:#fff}
+  .cup-shot.ar::after{font-family:var(--f-ar-hand)}
+  .scroll-cue{display:none}
+  .prog{display:none}
+}
+
+/* ---------- menu ---------- */
+.menu{padding-block:clamp(90px,11vw,160px)}
+.menu-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.menu h2{font-size:clamp(56px,8vw,128px)}
+.ring{position:relative;display:inline-block;padding:.05em .25em}
+.ring svg{position:absolute;inset:-14% -8%;width:116%;height:128%;overflow:visible;pointer-events:none}
+.ring path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:44px}
+.tab{border:1px solid var(--line);background:transparent;border-radius:99px;padding:10px 18px;cursor:pointer;font-size:15px;font-weight:500;transition:background .3s,color .3s,border-color .3s}
+.tab:hover{border-color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.menu-body{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(28px,5vw,80px);margin-top:36px;align-items:start}
+.items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:18px 0;border-bottom:1px solid var(--line);animation:rise .5s var(--ease) both}
+.item h3{margin:0;font-size:18px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.item p{margin:0;grid-column:1;color:var(--ink-2);font-size:14.5px}
+.item .p{grid-row:1;grid-column:2;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.item .p small{font-weight:400;color:var(--ink-2);font-size:12px;margin-inline-end:3px}
+.best{font-family:var(--f-hand);font-size:15px;font-weight:400;color:var(--rose);border:1.5px solid var(--rose);border-radius:99px;padding:0 9px;line-height:1.5}
+[dir="rtl"] .best{font-family:var(--f-ar);font-size:12px;padding:1px 9px}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.menu-side{position:sticky;top:96px}
+.menu-side .frame .clip{aspect-ratio:820/1000}
+.menu-side .hand{display:block;margin-top:14px;font-size:22px;color:var(--ink-2)}
+.order{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:56px}
+.order a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:22px 24px;border:1px solid var(--line);border-radius:10px;text-decoration:none;transition:border-color .3s,background .3s}
+.order a:hover{border-color:var(--ink);background:var(--paper-2)}
+.order b{font-size:20px;font-family:var(--f-display);font-variation-settings:"wdth" 80;font-weight:700}
+[dir="rtl"] .order b{font-family:var(--f-ar)}
+.order span{display:block;font-size:13px;color:var(--ink-2)}
+@media (max-width:980px){.menu-body{grid-template-columns:1fr}.menu-side{display:none}}
+@media (max-width:640px){.items{grid-template-columns:1fr}.order{grid-template-columns:1fr}}
+
+/* ---------- catering ---------- */
+.cater{padding-block:clamp(90px,11vw,160px);background:var(--paper-2);border-top:1px solid var(--line)}
+.cater h2{font-size:clamp(52px,7.4vw,118px)}
+.cater-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,80px);margin-top:48px;align-items:start}
+.lead{color:var(--ink-2);max-width:44ch;margin-top:20px;font-size:18px}
+.pk-table{width:100%;border-collapse:collapse;margin-top:34px;font-variant-numeric:tabular-nums}
+.pk-table th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);font-weight:500;text-align:start;padding:0 0 10px;border-bottom:1px solid var(--ink)}
+[dir="rtl"] .pk-table th{letter-spacing:0}
+.pk-table td{padding:13px 0;border-bottom:1px solid var(--line);font-size:17px}
+.pk-table tr{cursor:pointer;transition:background .25s}
+.pk-table tbody tr:hover td{background:color-mix(in srgb,var(--rose-soft) 60%,transparent)}
+.pk-table tr.on td{background:var(--rose-soft)}
+.pk-table td:first-child{padding-inline-start:10px}
+.pk-table .per{color:var(--ink-2);font-size:14px}
+.pk-table td:last-child,.pk-table th:last-child{text-align:end;padding-inline-end:10px}
+.policies{margin:34px 0 0;padding:0;list-style:none;display:grid;gap:12px;font-size:15px;color:var(--ink-2)}
+.policies li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:6px}
+.policies li span{font-family:var(--f-hand);font-size:20px;color:var(--ink);line-height:1.1}
+
+/* the cart: a brushed-steel booking card */
+.cart{position:relative;border-radius:14px;padding:clamp(22px,3vw,36px);color:#141414;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 40%),repeating-linear-gradient(90deg,#E6E8EA 0 2px,#C9CDD0 2px 3px,#DEE1E3 3px 7px,#D2D6D9 7px 8px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 40px 80px -40px rgba(0,0,0,.45)}
+.cart{color-scheme:light}
+.cart-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cart-mark{font-family:var(--f-hand);font-size:clamp(34px,4vw,48px);line-height:.9}
+.cart-mark small{display:block;font-family:var(--f-body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-top:8px;color:#4A4D52}
+[dir="rtl"] .cart-mark small{letter-spacing:0;font-family:var(--f-ar)}
+.wheels{display:flex;gap:6px}
+.wheels i{width:14px;height:14px;border-radius:50%;border:3px solid #2A2C2F;background:#7D8186}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:26px}
+.f{display:grid;gap:6px;min-width:0}
+.f.full{grid-column:1/-1}
+.f label,.f legend{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#45484C;font-weight:600;padding:0}
+[dir="rtl"] .f label,[dir="rtl"] .f legend{letter-spacing:0}
+.f input[type=text],.f input[type=date],.f select,.f textarea{width:100%;border:1px solid rgba(20,20,20,.22);background:rgba(255,255,255,.72);border-radius:8px;padding:12px 13px;font:inherit;font-size:16px;color:#141414;color-scheme:light}
+.f textarea{min-height:76px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{outline:2px solid #C63A69;outline-offset:1px}
+fieldset.f{border:0;margin:0;padding:0}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg label{flex:1 1 auto;text-transform:none;letter-spacing:0;font-size:14.5px;font-weight:500;color:#141414;border:1px solid rgba(20,20,20,.22);background:rgba(255,255,255,.55);border-radius:8px;padding:11px 12px;cursor:pointer;display:flex;gap:8px;align-items:center;min-width:0}
+.seg input{accent-color:#141414;margin:0}
+.seg label:has(input:checked){background:#141414;color:#fff;border-color:#141414}
+.est{grid-column:1/-1;display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;border-top:1px dashed rgba(20,20,20,.35);padding-top:18px;margin-top:6px}
+.est .k{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#45484C;font-weight:600}
+[dir="rtl"] .est .k{letter-spacing:0}
+.est .v{font-family:var(--f-display);font-variation-settings:"wdth" 72;font-weight:700;font-size:clamp(40px,4.4vw,58px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.est .lines{font-size:13.5px;color:#3D4044;font-variant-numeric:tabular-nums;margin-top:6px}
+.cart .btn{grid-column:1/-1;background:#141414;border-color:#141414;color:#fff;padding:16px 22px;font-size:16px}
+.cart .btn svg{width:20px;height:20px}
+.cart-foot{grid-column:1/-1;font-size:13px;color:#45484C;margin:0}
+@media (max-width:980px){.cater-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.form{grid-template-columns:1fr}}
+
+/* ---------- film strip ---------- */
+.strip{padding-block:clamp(80px,9vw,130px);overflow:hidden;border-top:1px solid var(--line)}
+.strip-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.strip h2{font-size:clamp(44px,5.6vw,88px)}
+.strip .hand{font-size:24px;color:var(--rose)}
+.track{display:flex;gap:16px;margin-top:44px;width:max-content;padding-inline:var(--gut)}
+.track figure{margin:0;width:clamp(200px,22vw,300px);flex:0 0 auto}
+.track figure.wide{width:clamp(300px,36vw,500px)}
+.track img{width:100%;height:clamp(290px,32vw,430px);object-fit:cover;border-radius:4px}
+.track figcaption{font-size:13px;color:var(--ink-2);margin-top:10px}
+@media (max-width:900px){.track{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.track::-webkit-scrollbar{display:none}.track figure{scroll-snap-align:start}}
+
+/* ---------- reviews ---------- */
+.reviews{padding-block:clamp(80px,9vw,130px);border-top:1px solid var(--line)}
+.rv-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.score b{display:block;font-family:var(--f-display);font-variation-settings:"wdth" 72;font-size:clamp(96px,12vw,180px);line-height:.85;font-weight:700;letter-spacing:-.04em}
+.score span{color:var(--ink-2);font-size:15px}
+blockquote{margin:0;border-top:1px solid var(--ink);padding-top:20px}
+blockquote p{margin:0;font-size:clamp(19px,1.7vw,24px);line-height:1.4;text-wrap:pretty}
+blockquote cite{display:block;margin-top:16px;font-style:normal;font-size:14px;color:var(--ink-2)}
+@media (max-width:900px){.rv-grid{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--paper);padding-top:clamp(80px,10vw,140px);padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+.big-mark{font-family:var(--f-hand);font-size:clamp(84px,17vw,280px);line-height:.8;letter-spacing:-.01em}
+.big-mark span{display:block;padding-inline-start:.9em}
+.foot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:clamp(56px,7vw,90px);border-top:1px solid color-mix(in srgb,var(--paper) 18%,transparent);padding-top:28px}
+.foot-grid h4{margin:0 0 10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;opacity:.6}
+[dir="rtl"] .foot-grid h4{letter-spacing:0}
+.foot-grid a{text-decoration:none}
+.foot-grid a:hover{text-decoration:underline}
+.foot-grid p{margin:0 0 6px;font-size:15px}
+.copy{background:none;border:1px solid color-mix(in srgb,var(--paper) 30%,transparent);border-radius:99px;padding:3px 10px;font-size:12px;cursor:pointer;margin-inline-start:6px;color:inherit}
+.legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:56px;font-size:13px;opacity:.55;padding-inline-end:76px}
+@media (max-width:760px){.foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.wa-fab{position:fixed;z-index:40;inset-inline-end:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);transition:transform .3s var(--ease)}
+.wa-fab:hover{transform:scale(1.06)}
+.wa-fab svg{width:26px;height:26px}
+
+/* draw-on logo */
+.draw path{stroke-dasharray:var(--len,400);stroke-dashoffset:0}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="cup" viewBox="0 0 96 70">
+      <path d="M18 14 C34 11 58 11 76 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M20 21 C36 18 58 18 74 21 L74 26 C58 23 36 23 20 26 Z" fill="currentColor"/>
+      <path d="M19 15 C19 30 21 44 27 52 C37 58 57 58 67 52 C73 44 75 30 76 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M19 24 C6 22 4 40 21 41" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M6 60 C26 66 70 66 90 59" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M14 55 C30 59 64 59 80 54" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.79 14.15c-.24.68-1.42 1.3-1.96 1.35-.5.05-.97.23-3.27-.68-2.77-1.09-4.52-3.92-4.66-4.1-.13-.18-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.25-.27.54-.34.72-.34h.52c.17 0 .39-.06.61.47.24.56.79 1.92.86 2.06.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.2 1.37.27.14.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.23.61-.14.25.09 1.59.75 1.86.89.27.14.45.2.52.32.06.11.06.66-.18 1.34Z"/></symbol>
+    <symbol id="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Brew by Nak home">
+      <svg aria-hidden="true"><use href="#cup"/></svg>
+      <span>brew<br>by nak</span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#cups" data-ar="المناسبات">Events</a>
+      <a href="#menu" data-ar="المنيو">Menu</a>
+      <a href="#catering" data-ar="الكيترنج">Catering</a>
+      <a href="#visit" data-ar="تواصل">Contact</a>
+    </nav>
+    <div class="nav-end">
+      <button class="lang" id="lang" type="button" aria-label="Switch language">عربي</button>
+      <a class="btn" href="https://www.talabat.com/qatar/brew-by-nak" target="_blank" rel="noopener" data-ar="اطلب الآن">Order now</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" data-ar="قهوة مختصة · ماتشا · الدوحة، قطر">Specialty coffee · Matcha · Doha, Qatar</p>
+      <h1 class="display" id="h1">
+        <span class="ln"><span data-ar="عِش">Savor</span></span>
+        <span class="ln"><span data-ar="اللحظة.">the moment.</span></span>
+      </h1>
+      <span class="sip hand" id="sip" data-ar="ارتشف واستمتع">sip &amp; enjoy</span>
+      <p class="hero-copy" data-ar="قهوة وماتشا من عربة ستانلس ستيل وماكينة لا مارزوكو. اطلبها على طلبات وسنونو، أو خلّ العربة تجي لمناسبتك.">Coffee and matcha poured from a stainless-steel cart and a La&nbsp;Marzocco. Order on Talabat and Snoonu, or roll the whole bar into your next event.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#menu"><span data-ar="شوف المنيو">See the menu</span><svg class="arrow"><use href="#arr"/></svg></a>
+        <a class="btn ghost" href="#catering" data-ar="احجز العربة">Book the cart</a>
+      </div>
+      <div class="rating"><span class="stars" aria-hidden="true">★★★★☆</span><b>4.2</b><span data-ar="من 42 تقييم على طلبات">from 42 ratings on Talabat</span></div>
+      <div class="scroll-cue" aria-hidden="true"><i></i><span data-ar="انزل">Scroll</span></div>
+    </div>
+    <div class="hero-media" id="heroMedia">
+      <figure class="frame" style="margin:0">
+        <div class="clip"><img id="heroImg" src="img/pearl-cart.jpg" alt="The Brew by Nak cart set up by a pool with the Doha skyline behind it" width="820" height="1180" fetchpriority="high"></div>
+        <figcaption data-ar="بوب أب صيفي · الدوحة">Summer pop-up · Doha</figcaption>
+      </figure>
+      <div class="snap a" data-speed="-60"><img src="img/matcha-palm.jpg" alt="Iced matcha with the Brew by Nak logo held up at night" loading="lazy"><span class="hand" data-ar="من قصصكم">from your stories</span></div>
+      <div class="snap b" data-speed="50"><img src="img/latte-car.jpg" alt="Iced latte in a Brew by Nak cup by a car window" loading="lazy"><span class="hand" data-ar="في الطريق">on the road</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap">
+    <p class="eyebrow" style="margin:0 0 28px" data-ar="الحكاية">The idea</p>
+    <p id="stmt" data-ar="عربة واحدة، ماكينة لا مارزوكو، وشعار <em>مرسوم باليد</em>. برو باي ناك تجيب الكافيه لأي مكان تجتمع فيه الدوحة.">One steel cart, one La&nbsp;Marzocco, and a logo <em>drawn by hand.</em> Brew by Nak brings the café to wherever Doha is gathering.</p>
+    <div class="facts">
+      <div><b>36</b><span data-ar="مشروب في المنيو">drinks on the menu</span></div>
+      <div><b>4.2★</b><span data-ar="تقييم طلبات">Talabat rating</span></div>
+      <div><b data-ar="4 ساعات">4 hrs</b><span data-ar="خدمة بار في كل حجز">of bar service per booking</span></div>
+      <div><b>300</b><span data-ar="كوب كحد أقصى للباقة">cups in the largest package</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CUPS REEL -->
+<section class="cups" id="cups">
+  <div class="wrap cups-pin" id="cupsPin">
+    <div>
+      <p class="eyebrow" data-ar="الكيترنج">Catering</p>
+      <h2 class="display" data-ar="مناسبتك،<br>كوبك.">Your event,<br>your cup.</h2>
+      <p class="cups-lead" data-ar="كل حجز يقدر يجي بأكواب وملصق عربة مصممة على ثيم مناسبتك. عيد، عيد ميلاد، بوب أب، أو جمعة خاصة.">Every booking can come with cups and a cart wrap designed around your theme. Eid, a birthday, a brand pop-up or a quiet gathering at home.</p>
+      <div class="ev-names" aria-live="polite">
+        <div class="ev"><div class="t">Petals &amp; Whispers</div><div class="m" data-ar="بوب أب صيفي مع ميما ستوديوز">Summer pop-up with Mema Studios</div></div>
+        <div class="ev"><div class="t">Haya's 20th Rodeo</div><div class="m" data-ar="عيد ميلاد · ثيم رودِيو">Birthday · rodeo theme</div></div>
+        <div class="ev"><div class="t ar" dir="rtl">عيدكم مبارك</div><div class="m" data-ar="جمعة العيد">Eid gathering</div></div>
+        <div class="ev"><div class="t">Maryam's Lucky 21</div><div class="m" data-ar="عيد ميلاد · ثيم لاس فيغاس">Birthday · lucky 21 theme</div></div>
+        <div class="ev"><div class="t">The Swan Cart</div><div class="m" data-ar="مناسبة خاصة">Private event</div></div>
+      </div>
+      <p class="cups-note"><span data-ar="أكواب مخصصة + ملصق العربة">Custom cups + cart sticker</span> <b data-ar="350 ر.ق">QR 350</b> <span data-ar="· قبل 3 أيام">· 3 days ahead</span></p>
+    </div>
+    <div class="cups-stage" id="cupsStage">
+      <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
+      <figure class="cup-shot" style="margin:0" data-label="Petals & Whispers"><img src="img/cup-pool.jpg" alt="Petals and Whispers custom cup held by the pool" loading="lazy"></figure>
+      <figure class="cup-shot" style="margin:0" data-label="Haya's 20th Rodeo"><img src="img/rodeo-cup.jpg" alt="Custom rodeo-themed birthday cup" loading="lazy"></figure>
+      <figure class="cup-shot ar" style="margin:0" data-label="عيدكم مبارك"><img src="img/eid-cart.jpg" alt="Eid-themed cart with a barista at the La Marzocco" loading="lazy"></figure>
+      <figure class="cup-shot" style="margin:0" data-label="Maryam's Lucky 21"><img src="img/lucky-red.jpg" alt="Red Lucky 21 custom cup at a birthday party" loading="lazy"></figure>
+      <figure class="cup-shot" style="margin:0" data-label="The Swan Cart"><img src="img/swan-cart.jpg" alt="Cart wrapped with a swan illustration and Brew By Nak lettering" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <div>
+        <p class="eyebrow" data-ar="بالريال القطري">Prices in Qatari riyal</p>
+        <h2 class="display"><span class="ring"><span data-ar="المنيو">Menu</span><svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path class="ring-path" d="M40 20 C110 2 250 6 284 34 C312 62 250 108 150 112 C60 116 6 92 10 60 C14 30 70 14 150 12 C210 10 262 18 280 30"/></svg></span></h2>
+      </div>
+      <p class="hand" style="font-size:24px;color:var(--ink-2);margin:0" data-ar="★ = الأكثر طلباً على طلبات">★ = Talabat best sellers</p>
+    </div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="menu-body">
+      <ul class="items" id="items"></ul>
+      <aside class="menu-side">
+        <figure class="frame" style="margin:0"><div class="clip"><img id="sideImg" src="img/latte-car.jpg" alt="" loading="lazy"></div></figure>
+        <span class="hand" id="sideCap"></span>
+      </aside>
+    </div>
+    <div class="order">
+      <a href="https://www.talabat.com/qatar/brew-by-nak" target="_blank" rel="noopener"><div><b>Talabat</b><span data-ar="توصيل لمنطقتك">Delivered to your door</span></div><svg width="22" height="22" class="arrow"><use href="#arr"/></svg></a>
+      <a href="https://snoonu.com" target="_blank" rel="noopener"><div><b>Snoonu</b><span data-ar="ابحث عن Brew by Nak">Search “Brew by Nak”</span></div><svg width="22" height="22" class="arrow"><use href="#arr"/></svg></a>
+      <a href="https://wa.me/97451377577" target="_blank" rel="noopener"><div><b data-ar="واتساب">WhatsApp</b><span data-ar="طلبات كبيرة واستفسارات">Big orders &amp; questions</span></div><svg width="22" height="22" class="arrow"><use href="#arr"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- CATERING -->
+<section class="cater" id="catering">
+  <div class="wrap">
+    <p class="eyebrow" data-ar="العربة لمناسبتك">The cart, at your event</p>
+    <h2 class="display" data-ar="أربع ساعات.<br>بار قهوة كامل.">Four hours.<br>A full coffee bar.</h2>
+    <div class="cater-grid">
+      <div>
+        <p class="lead" data-ar="نجيب العربة والماكينة والباريستا. اختر عدد الأكواب، والسعر يشمل كل المنيو لمدة 4 ساعات.">We bring the cart, the machine and the barista. Pick a cup count; every package covers the full menu for four hours.</p>
+        <table class="pk-table" id="pkTable">
+          <thead><tr><th data-ar="الأكواب">Cups</th><th data-ar="للكوب">Per cup</th><th data-ar="السعر">Price</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <ul class="policies">
+          <li><span>1.</span><div data-ar="عربون 50٪ لتأكيد الحجز.">A 50% deposit confirms the booking.</div></li>
+          <li><span>2.</span><div data-ar="العربون غير مسترد خلال 24 ساعة من موعد المناسبة.">Deposits are non-refundable within 24 hours of the event.</div></li>
+          <li><span>3.</span><div data-ar="عند الإلغاء قبل 24 ساعة، يمكن تغيير الموعد حسب التوفر.">Cancel more than 24 hours ahead and the date can move, subject to availability.</div></li>
+          <li><span>4.</span><div data-ar="التوصيل: 100 ر.ق داخل الدوحة، 150 ر.ق خارجها.">Delivery: QR 100 in Doha, QR 150 outside Doha.</div></li>
+          <li><span>5.</span><div data-ar="أكواب مخصصة وملصق للعربة: 350 ر.ق، تُطلب قبل 3 أيام.">Custom cups and cart sticker: QR 350, ordered 3 days ahead.</div></li>
+        </ul>
+      </div>
+
+      <form class="cart" id="cartForm" novalidate>
+        <div class="cart-top">
+          <div class="cart-mark"><span data-ar="احجز العربة">book the cart</span><small data-ar="تقدير فوري · يُرسل على واتساب">Instant estimate · sent on WhatsApp</small></div>
+          <div class="wheels" aria-hidden="true"><i></i><i></i></div>
+        </div>
+        <div class="form">
+          <div class="f"><label for="fName" data-ar="الاسم">Name</label><input type="text" id="fName" autocomplete="name" placeholder="Your name" data-ar-ph="اسمك"></div>
+          <div class="f"><label for="fDate" data-ar="تاريخ المناسبة">Event date</label><input type="date" id="fDate"></div>
+          <div class="f full"><label for="fPkg" data-ar="الباقة">Package</label><select id="fPkg"></select></div>
+          <fieldset class="f full"><legend data-ar="المكان">Location</legend>
+            <div class="seg">
+              <label><input type="radio" name="area" id="aDoha" value="doha" checked> <span data-ar="داخل الدوحة · 100 ر.ق">In Doha · QR 100</span></label>
+              <label><input type="radio" name="area" id="aOut" value="out"> <span data-ar="خارج الدوحة · 150 ر.ق">Outside Doha · QR 150</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="f full"><legend data-ar="إضافات">Extras</legend>
+            <div class="seg"><label><input type="checkbox" id="fCustom"> <span data-ar="أكواب مخصصة + ملصق العربة · 350 ر.ق">Custom cups + cart sticker · QR 350</span></label></div>
+          </fieldset>
+          <div class="f full"><label for="fNote" data-ar="الثيم أو ملاحظات">Theme or notes</label><textarea id="fNote" placeholder="Birthday, Eid, colours, venue…" data-ar-ph="عيد ميلاد، عيد، الألوان، المكان…"></textarea></div>
+          <div class="est">
+            <div><div class="k" data-ar="التقدير">Estimate</div><div class="lines" id="estLines"></div></div>
+            <div class="v" id="estTotal">QR 0</div>
+          </div>
+          <button class="btn" type="submit"><svg><use href="#wa"/></svg><span data-ar="أرسل الطلب على واتساب">Send request on WhatsApp</span></button>
+          <p class="cart-foot" data-ar="يفتح واتساب برسالة جاهزة. يتأكد الحجز بعد دفع عربون 50٪.">Opens WhatsApp with your details filled in. The booking is confirmed once the 50% deposit is paid.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<section class="strip" aria-labelledby="stripTitle">
+  <div class="wrap strip-head">
+    <h2 class="display" id="stripTitle" data-ar="من البار">From the bar</h2>
+    <span class="hand" data-ar="@brewbynak">@brewbynak</span>
+  </div>
+  <div class="track" id="track" dir="ltr">
+    <figure><img src="img/three-cups.jpg" alt="Three custom cups on the cart counter" loading="lazy"><figcaption data-ar="أكواب جاهزة للضيوف">Cups ready for guests</figcaption></figure>
+    <figure class="wide"><img src="img/night-grinder.jpg" alt="Grinder full of beans and stacked cups at a night event" loading="lazy"><figcaption data-ar="خدمة ليلية">Night service</figcaption></figure>
+    <figure><img src="img/eid-cups.jpg" alt="Stacks of Eid Mubarak cups on the La Marzocco" loading="lazy"><figcaption data-ar="أكواب العيد">Eid cups</figcaption></figure>
+    <figure><img src="img/pink-table.jpg" alt="Two coffees on a pink table under hydrangeas" loading="lazy"><figcaption data-ar="بتلات وهمسات">Petals &amp; Whispers</figcaption></figure>
+    <figure><img src="img/rodeo-hat.jpg" alt="Iced drink in a rodeo cup beside a sparkling cowboy hat" loading="lazy"><figcaption data-ar="ليلة الرودِيو">Rodeo night</figcaption></figure>
+    <figure><img src="img/matcha-dark.jpg" alt="Iced matcha in a Brew by Nak cup" loading="lazy"><figcaption data-ar="ماتشا مثلجة">Iced matcha</figcaption></figure>
+    <figure><img src="img/cup-lilac.jpg" alt="Guest holding a custom cup" loading="lazy"><figcaption data-ar="ضيوف البوب أب">Pop-up guests</figcaption></figure>
+    <figure><img src="img/night-cups.jpg" alt="Cups stacked on the machine in a lit garden" loading="lazy"><figcaption data-ar="حديقة ليلية">Garden, after dark</figcaption></figure>
+    <figure><img src="img/eid-cup.jpg" alt="Iced coffee in an Eid cup on a marble table" loading="lazy"><figcaption data-ar="مجلس العيد">Eid majlis</figcaption></figure>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap rv-grid">
+    <div class="score"><b>4.2</b><span data-ar="★ من 42 تقييم على طلبات">★ from 42 ratings on Talabat</span></div>
+    <blockquote><p>“Matcha was delicious and the packaging is soo good. Would order again!”</p><cite data-ar="هيا · تقييم على طلبات">Haya · Talabat review</cite></blockquote>
+    <blockquote><p>“Very good service, thank you. The taste and everything was perfect.”</p><cite data-ar="خليفة · تقييم على طلبات">Khalifa · Talabat review</cite></blockquote>
+  </div>
+</section>
+
+</main>
+
+<footer id="visit">
+  <div class="wrap">
+    <div class="big-mark" aria-label="brew by nak">brew<span>by nak</span></div>
+    <div class="foot-grid">
+      <div><h4 data-ar="واتساب">WhatsApp</h4><p><span dir="ltr">+974 5137 7577</span><button class="copy" type="button" id="copyNum" data-ar="نسخ">Copy</button></p><p><a href="https://wa.me/97451377577" target="_blank" rel="noopener" data-ar="افتح المحادثة">Open chat</a></p></div>
+      <div><h4 data-ar="اطلب">Order</h4><p><a href="https://www.talabat.com/qatar/brew-by-nak" target="_blank" rel="noopener">Talabat</a></p><p><a href="https://snoonu.com" target="_blank" rel="noopener">Snoonu</a></p></div>
+      <div><h4 data-ar="تابعنا">Follow</h4><p><a href="https://www.instagram.com/brewbynak/" target="_blank" rel="noopener">Instagram @brewbynak</a></p></div>
+      <div><h4 data-ar="أين">Where</h4><p data-ar="الدوحة، قطر · العربة تتنقل">Doha, Qatar · the cart travels</p></div>
+    </div>
+    <div class="legal"><span>© 2026 Brew by Nak</span><span data-ar="ارتشف واستمتع">Savor the moment, sip &amp; enjoy.</span></div>
+  </div>
+</footer>
+
+<a class="wa-fab" href="https://wa.me/97451377577" target="_blank" rel="noopener" aria-label="Message Brew by Nak on WhatsApp"><svg><use href="#wa"/></svg></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const WA = "97451377577";
+  let lang = "en";
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- data ---------- */
+  const MENU = [
+    { id: "cold", en: "Cold", ar: "مشروبات باردة", img: "img/latte-car.jpg", cap: ["iced latte, on the road", "لاتيه مثلج في الطريق"], items: [
+      ["Spanish Latte", "سبانش لاتيه", "Chilled and sweetened.", "مبرّد ومُحلّى.", 28],
+      ["Vanilla Latte", "فانيلا لاتيه", "Iced espresso with vanilla.", "إسبريسو مثلج بالفانيلا.", 28],
+      ["Nak's Signature", "توقيع ناك", "The house recipe.", "وصفة البيت.", 29],
+      ["Flat White", "فلات وايت", "Smooth iced espresso and milk.", "إسبريسو مثلج وحليب ناعم.", 24],
+      ["Brown Sugar Shaken Espresso", "إسبريسو مخفوق بالسكر البني", "Frothy espresso with brown sugar.", "إسبريسو برغوة وسكر بني.", 29],
+      ["Salted Brown Butter Latte", "لاتيه الزبدة البنية المملحة", "Nutty brown butter and sea salt.", "زبدة بنية محمّصة وملح بحري.", 29],
+      ["Americano", "أمريكانو", "Espresso over ice.", "إسبريسو على الثلج.", 15],
+      ["Cortado", "كورتادو", "Small, strong iced coffee.", "قهوة مثلجة صغيرة وقوية.", 22],
+      ["S'mores Latte", "سمورز لاتيه", "Whipped cream, chocolate, toasted marshmallow.", "كريمة، شوكولاتة، ومارشملو محمّص.", 30],
+      ["Salted Maple Latte", "لاتيه القيقب المملح", "Maple syrup and a touch of sea salt.", "شراب القيقب ولمسة ملح بحري.", 29],
+      ["Iced Mocha", "موكا مثلجة", "Espresso, chocolate and milk over ice.", "إسبريسو وشوكولاتة وحليب على الثلج.", 29],
+      ["Butterscotch Latte", "باترسكوتش لاتيه", "Espresso with butterscotch syrup.", "إسبريسو بشراب الباترسكوتش.", 29],
+      ["Dirty Espresso", "ديرتي إسبريسو", "Cold espresso blended with ice cream.", "إسبريسو بارد مع الآيس كريم.", 30, 1],
+      ["Iced Vietnamese", "فيتنامي مثلج", "Strong coffee with condensed milk.", "قهوة قوية بالحليب المكثف.", 29],
+    ]},
+    { id: "matcha", en: "Matcha", ar: "ماتشا", img: "img/matcha-dark.jpg", cap: ["the matcha everyone posts", "الماتشا اللي الكل ينشرها"], items: [
+      ["Regular Iced Matcha", "ماتشا مثلجة", "Pure green tea and milk.", "شاي أخضر نقي وحليب.", 24],
+      ["Vanilla Iced Matcha", "ماتشا بالفانيلا", "Matcha with vanilla sweetness.", "ماتشا بحلاوة الفانيلا.", 28],
+      ["Salted Vanilla Matcha", "ماتشا فانيلا مملحة", "Sweet and salty green tea.", "ماتشا بين الحلو والمالح.", 29],
+      ["Blondie Matcha", "بلوندي ماتشا", "Blondie-flavoured matcha.", "ماتشا بنكهة البلوندي.", 29],
+      ["Strawberry Matcha", "ماتشا بالفراولة", "Layered matcha and strawberry.", "طبقات ماتشا وفراولة.", 28],
+      ["White Chocolate Matcha", "ماتشا بالشوكولاتة البيضاء", "Creamy white chocolate and matcha.", "شوكولاتة بيضاء كريمية وماتشا.", 28],
+      ["Marshmallow Matcha", "ماتشا بالمارشملو", "Matcha with marshmallow.", "ماتشا مع المارشملو.", 30],
+      ["Nak's Signature Matcha", "ماتشا توقيع ناك", "The house matcha.", "ماتشا البيت.", 29],
+      ["Salted Maple Matcha", "ماتشا القيقب المملحة", "Maple sweetness, a hint of sea salt.", "حلاوة القيقب ولمسة ملح بحري.", 30, 1],
+    ]},
+    { id: "hot", en: "Hot", ar: "مشروبات ساخنة", img: "img/night-cups.jpg", cap: ["for the cooler nights", "لليالي الباردة"], items: [
+      ["Hot Spanish Latte", "سبانش لاتيه ساخن", "Sweetened with condensed milk.", "مُحلّى بالحليب المكثف.", 28],
+      ["Hot Vanilla Latte", "فانيلا لاتيه ساخن", "Espresso with vanilla syrup.", "إسبريسو بشراب الفانيلا.", 28],
+      ["Hot Nak's Signature", "توقيع ناك ساخن", "The house recipe, served hot.", "وصفة البيت، ساخنة.", 29, 1],
+      ["Hot Americano", "أمريكانو ساخن", "Espresso and hot water.", "إسبريسو وماء ساخن.", 15],
+      ["Hot Cortado", "كورتادو ساخن", "Equal parts espresso and milk.", "إسبريسو وحليب بالتساوي.", 22],
+      ["Hot Cappuccino", "كابتشينو", "Espresso with extra foam.", "إسبريسو برغوة إضافية.", 24],
+      ["Hot Flat White", "فلات وايت ساخن", "Espresso with smooth micro-foam.", "إسبريسو برغوة ناعمة.", 24],
+    ]},
+    { id: "refresh", en: "Refreshers", ar: "منعشات", img: "img/eid-cup.jpg", cap: ["no coffee, all colour", "بدون قهوة، كلها ألوان"], items: [
+      ["Passion Ice Tea", "شاي الباشن المثلج", "Tangy tropical tea.", "شاي استوائي منعش.", 29],
+      ["Hibiscus", "كركديه", "Tart and floral iced tea.", "كركديه مثلج بنكهة زهرية.", 29],
+      ["Raspberry Lemonade", "ليموناضة التوت", "Zesty lemon and berry.", "ليمون وتوت العليق.", 29],
+      ["Pineapple Coconut", "أناناس وجوز هند", "Pineapple and coconut over ice.", "أناناس وجوز هند على الثلج.", 29],
+      ["Mango Dragon Fruit Refresher", "مانجو وفاكهة التنين", "Sweet mango and dragon fruit.", "مانجو حلوة وفاكهة التنين.", 29, 1],
+      ["Blue Lagoon Lemonade", "ليموناضة بلو لاغون", "Blue citrus lemonade.", "ليموناضة زرقاء بالحمضيات.", 29],
+    ]},
+    { id: "box", en: "Gathering Box", ar: "صندوق التجمعات", img: "img/three-cups.jpg", cap: ["for the whole majlis", "للمجلس كله"], items: [
+      ["Gathering Box", "صندوق التجمعات", "A shareable box for gatherings. Ask on WhatsApp what goes inside.", "صندوق للمشاركة في الجمعات. اسألنا على واتساب عن محتواه.", 150],
+    ]},
+  ];
+  const PKG = [[30, 900], [50, 1400], [70, 1890], [100, 2600], [150, 3150], [200, 3400], [250, 4000], [300, 4500]];
+
+  const qr = n => lang === "ar" ? `${n.toLocaleString("en-US")} ر.ق` : `QR ${n.toLocaleString("en-US")}`;
+  const per = (p, c) => +(p / c).toFixed(1);
+
+  /* ---------- menu ---------- */
+  let current = "cold";
+  function renderTabs() {
+    $("#tabs").innerHTML = MENU.map(c => `<button class="tab" role="tab" type="button" id="tab-${c.id}" aria-selected="${c.id === current}" data-id="${c.id}">${lang === "ar" ? c.ar : c.en} <span style="opacity:.5">${c.items.length}</span></button>`).join("");
+  }
+  function renderItems() {
+    const c = MENU.find(m => m.id === current);
+    $("#items").setAttribute("aria-labelledby", "tab-" + c.id);
+    $("#items").innerHTML = c.items.map((it, i) => {
+      const [en, ar, den, dar, price, best] = it;
+      return `<li class="item" style="animation-delay:${i * 35}ms"><h3>${lang === "ar" ? ar : en}${best ? `<span class="best">${lang === "ar" ? "الأكثر طلباً" : "★ best seller"}</span>` : ""}</h3><span class="p">${lang === "ar" ? `${price} <small>ر.ق</small>` : `<small>QR</small>${price}`}</span><p>${lang === "ar" ? dar : den}</p></li>`;
+    }).join("");
+    const img = $("#sideImg");
+    if (!img.src.endsWith(c.img)) { img.style.opacity = 0; setTimeout(() => { img.src = c.img; img.onload = () => (img.style.opacity = 1); }, 180); }
+    img.style.transition = "opacity .35s";
+    $("#sideCap").textContent = lang === "ar" ? c.cap[1] : c.cap[0];
+  }
+  $("#tabs").addEventListener("click", e => {
+    const b = e.target.closest(".tab"); if (!b) return;
+    current = b.dataset.id; renderTabs(); renderItems();
+    $("#tab-" + current).focus();
+  });
+  $("#tabs").addEventListener("keydown", e => {
+    if (!["ArrowRight", "ArrowLeft"].includes(e.key)) return;
+    const i = MENU.findIndex(m => m.id === current);
+    const dir = (e.key === "ArrowRight") !== (document.dir === "rtl") ? 1 : -1;
+    current = MENU[(i + dir + MENU.length) % MENU.length].id; renderTabs(); renderItems(); $("#tab-" + current).focus();
+  });
+
+  /* ---------- catering ---------- */
+  let pkgIdx = 3;
+  function renderPkg() {
+    $("#pkTable tbody").innerHTML = PKG.map(([c, p], i) => `<tr data-i="${i}" class="${i === pkgIdx ? "on" : ""}" tabindex="0"><td>${c} ${lang === "ar" ? "كوب" : "cups"}</td><td class="per">${lang === "ar" ? `${per(p, c)} ر.ق` : `QR ${per(p, c)}`}</td><td>${qr(p)}</td></tr>`).join("");
+    $("#fPkg").innerHTML = PKG.map(([c, p], i) => `<option value="${i}" ${i === pkgIdx ? "selected" : ""}>${c} ${lang === "ar" ? "كوب · 4 ساعات" : "cups · 4 hours"} — ${qr(p)}</option>`).join("");
+  }
+  function estimate() {
+    const [cups, price] = PKG[pkgIdx];
+    const out = $("#aOut").checked, custom = $("#fCustom").checked;
+    const del = out ? 150 : 100, cu = custom ? 350 : 0, total = price + del + cu;
+    const L = lang === "ar"
+      ? [`الباقة ${qr(price)}`, `التوصيل ${qr(del)}`, custom ? `أكواب مخصصة ${qr(cu)}` : null, `العربون 50٪: ${qr(Math.round(total / 2))}`]
+      : [`Package ${qr(price)}`, `Delivery ${qr(del)}`, custom ? `Custom cups ${qr(cu)}` : null, `50% deposit: ${qr(Math.round(total / 2))}`];
+    $("#estLines").innerHTML = L.filter(Boolean).join(" · ");
+    $("#estTotal").textContent = qr(total);
+    return { cups, price, del, cu, total, out, custom };
+  }
+  $("#pkTable").addEventListener("click", e => { const tr = e.target.closest("tbody tr"); if (!tr) return; pkgIdx = +tr.dataset.i; renderPkg(); estimate(); });
+  $("#pkTable").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { const tr = e.target.closest("tbody tr"); if (!tr) return; e.preventDefault(); pkgIdx = +tr.dataset.i; renderPkg(); estimate(); $(`#pkTable tr[data-i="${pkgIdx}"]`).focus(); } });
+  $("#fPkg").addEventListener("change", e => { pkgIdx = +e.target.value; renderPkg(); estimate(); });
+  $$("#cartForm input").forEach(i => i.addEventListener("change", estimate));
+  $("#cartForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const s = estimate();
+    const name = $("#fName").value.trim(), date = $("#fDate").value, note = $("#fNote").value.trim();
+    const msg = lang === "ar"
+      ? [`مرحباً برو باي ناك، أبغى أحجز العربة:`, name && `الاسم: ${name}`, date && `التاريخ: ${date}`, `الباقة: ${s.cups} كوب (${qr(s.price)})`, `المكان: ${s.out ? "خارج الدوحة" : "داخل الدوحة"}`, `أكواب مخصصة: ${s.custom ? "نعم" : "لا"}`, note && `الثيم/ملاحظات: ${note}`, `التقدير: ${qr(s.total)}`]
+      : [`Hi Brew by Nak, I'd like to book the cart:`, name && `Name: ${name}`, date && `Date: ${date}`, `Package: ${s.cups} cups (${qr(s.price)})`, `Location: ${s.out ? "Outside Doha" : "Doha"}`, `Custom cups + sticker: ${s.custom ? "Yes" : "No"}`, note && `Theme/notes: ${note}`, `Estimate: ${qr(s.total)}`];
+    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg.filter(Boolean).join("\n"))}`, "_blank", "noopener");
+  });
+
+  $("#copyNum").addEventListener("click", async e => {
+    const b = e.currentTarget, old = b.textContent;
+    try { await navigator.clipboard.writeText("+97451377577"); b.textContent = lang === "ar" ? "تم النسخ" : "Copied"; }
+    catch { const r = document.createRange(); r.selectNodeContents(b.previousElementSibling); getSelection().removeAllRanges(); getSelection().addRange(r); }
+    setTimeout(() => (b.textContent = old), 1600);
+  });
+
+  /* ---------- i18n ---------- */
+  $$("[data-ar]").forEach(el => (el.dataset.en = el.innerHTML));
+  $$("[data-ar-ph]").forEach(el => (el.dataset.enPh = el.placeholder));
+  function setLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+    $$("[data-ar]").forEach(el => (el.innerHTML = l === "ar" ? el.dataset.ar : el.dataset.en));
+    $$("[data-ar-ph]").forEach(el => (el.placeholder = l === "ar" ? el.dataset.arPh : el.dataset.enPh));
+    $("#lang").textContent = l === "ar" ? "English" : "عربي";
+    try { localStorage.setItem("bbn-lang", l); } catch {}
+    renderTabs(); renderItems(); renderPkg(); estimate(); splitStatement();
+    if (window.ScrollTrigger) requestAnimationFrame(() => ScrollTrigger.refresh());
+  }
+  $("#lang").addEventListener("click", () => setLang(lang === "en" ? "ar" : "en"));
+
+  /* ---------- statement word split ---------- */
+  let stmtTween;
+  function splitStatement() {
+    const p = $("#stmt");
+    const walk = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/( +)/).forEach(w => {
+            if (!w) return;
+            if (/^ +$/.test(w)) frag.append(w);
+            else { const s = document.createElement("span"); s.className = "w"; s.textContent = w; frag.append(s); }
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains("w")) walk(n);
+      });
+    };
+    walk(p);
+    if (stmtTween) { stmtTween.scrollTrigger && stmtTween.scrollTrigger.kill(); stmtTween.kill(); }
+    if (window.gsap && !reduce) {
+      stmtTween = gsap.fromTo($$(".w", p), { opacity: .14 }, { opacity: 1, stagger: .08, ease: "none",
+        scrollTrigger: { trigger: p, start: "top 80%", end: "bottom 45%", scrub: true } });
+    }
+  }
+
+  /* ---------- nav state ---------- */
+  const nav = $("#nav");
+  const onScroll = () => nav.classList.toggle("solid", scrollY > 40);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  /* ---------- boot ---------- */
+  let saved = "en"; try { saved = localStorage.getItem("bbn-lang") || "en"; } catch {}
+  renderTabs(); renderItems(); renderPkg(); estimate();
+  if (saved === "ar") setLang("ar"); else splitStatement();
+
+  if (!window.gsap || reduce) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.Lenis) {
+    const lenis = new Lenis({ lerp: .1 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+      const t = $(a.getAttribute("href")); if (!t) return; e.preventDefault(); lenis.scrollTo(t, { offset: -60 });
+    }));
+  }
+
+  // hero entrance
+  gsap.from("#h1 .ln > span", { yPercent: 105, duration: 1.1, ease: "expo.out", stagger: .09, delay: .1 });
+  gsap.from("#sip", { opacity: 0, y: 20, rotate: -12, duration: .9, ease: "back.out(1.6)", delay: .55 });
+  gsap.from("#heroMedia .frame", { clipPath: "inset(18% 12% 18% 12%)", duration: 1.4, ease: "expo.out", delay: .2 });
+  gsap.from("#heroMedia .snap", { opacity: 0, y: 40, duration: 1, ease: "expo.out", stagger: .12, delay: .7 });
+
+  // hero scroll
+  gsap.to("#heroImg", { scale: 1.18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  $$("#heroMedia .snap").forEach(s => gsap.to(s, { y: +s.dataset.speed * 2, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } }));
+
+  // menu ring draw
+  const ring = $(".ring-path");
+  if (ring) { const len = ring.getTotalLength(); gsap.fromTo(ring, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut", scrollTrigger: { trigger: ".menu", start: "top 70%" } }); }
+
+  const mm = gsap.matchMedia();
+  mm.add("(min-width: 901px)", () => {
+    // pinned cup reel
+    const shots = $$(".cup-shot"), evs = $$(".ev");
+    const tl = gsap.timeline({ scrollTrigger: { trigger: "#cupsPin", start: "top top", end: () => "+=" + innerHeight * (shots.length - 1) * .9, pin: true, scrub: .6, anticipatePin: 1 } });
+    shots.forEach((s, i) => {
+      if (!i) return;
+      tl.to(s, { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "power2.inOut" }, i - 1)
+        .fromTo($("img", s), { scale: 1.25 }, { scale: 1, duration: 1, ease: "power2.out" }, i - 1)
+        .to(evs[i - 1], { opacity: 0, y: -30, duration: .4 }, i - 1 + .1)
+        .fromTo(evs[i], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .4 }, i - 1 + .5);
+    });
+    tl.fromTo("#progBar", { height: "20%" }, { height: "100%", duration: shots.length - 1, ease: "none" }, 0);
+
+    // film strip horizontal scrub
+    const track = $("#track");
+    const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+    gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: ".strip", start: "top 70%", end: () => "+=" + (dist() + innerHeight * .3), scrub: true, invalidateOnRefresh: true } });
+  });
+
+  addEventListener("load", () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
